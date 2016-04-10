@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul.weeks {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  width: 800px;
+  padding: 0;
+}
+
+li.week {
+  border: 1px solid #000;
+  height: 3px;
+  width: 3px;
+  margin: 2px 5px 2px 0;
+}
+
+.active {
+  background-color: orange;
+}
+
