@@ -9,18 +9,18 @@ ul.weeks {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
+  width: 1000px;
   padding: 0;
 }
 
 li.week {
   border: 1px solid #000;
-  height: 3px;
-  width: 3px;
+  height: 4px;
+  width: 4px;
   margin: 2px 5px 2px 0;
 }
 
 .active {
-  background-color: orange;
+  background-color: #37456B;
 }
 
