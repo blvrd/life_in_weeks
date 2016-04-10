@@ -8,5 +8,9 @@
   },
   "chrome_url_overrides" : {
     "newtab": "weeks.html"
-  }
+  },
+  "permissions": [
+    "cookies",
+    "*://*.google.com/"
+  ]
 }
