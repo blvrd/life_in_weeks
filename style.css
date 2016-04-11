@@ -25,13 +25,13 @@ li.week {
 }
 
 .dobInputGroup {
-  font-size: 24px;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
 }
 
 .dobInputGroup input {
-  font-size: 22px;
+  font-size: 14px;
 }
 
 .active {

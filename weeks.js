@@ -1,4 +1,4 @@
-function getCookie (cookieName, callback){
+function getCookie(cookieName, callback) {
     chrome.cookies.get({
       'url':'http://www.google.com',
       'name':cookieName
@@ -8,7 +8,7 @@ function getCookie (cookieName, callback){
     });
 }
 
-function removeCookie (cookieName, callback){
+function removeCookie(cookieName, callback) {
     chrome.cookies.remove({
       'url':'http://www.google.com',
       'name':cookieName
@@ -18,14 +18,22 @@ function removeCookie (cookieName, callback){
     });
 }
 
+function setCookie(cookieName, value, callback) {
+  chrome.cookies.set({
+    url: 'http://www.google.com',
+    name: cookieName,
+    value: value.toString()
+  })
+}
+
 window.container = document.getElementById("weeks");
 window.currentDate = new Date();
 window.weeksLifespan = 4693 // 90 years
 window.dateInput = document.getElementById("dob")
 
 getCookie("birthDate", function(cookie) {
-  if (cookie === null) {
-    showExplanation()
+  if (cookie === null || cookie.value === "Invalid Date") {
+    showInstructions()
   } else {
     var birthDate = new Date(cookie.value)
     dateInput.value = birthDate.toISOString().slice(0, 10)
@@ -45,6 +53,7 @@ var generateWeeks = function(birthDate) {
     container.removeChild(container.lastChild);
   }
 
+  showDescription()
   var weeksAlive = calculateWeeksAlive(birthDate)
 
   for (i = 0; i < weeksLifespan; i++) {
@@ -59,15 +68,25 @@ var generateWeeks = function(birthDate) {
 
 var setDate = function(e) {
   var birthDate = new Date(e.target.value)
-  chrome.cookies.set({ url: 'http://www.google.com', name: 'birthDate', value: birthDate.toString() })
+
+  setCookie('birthDate', birthDate)
   generateWeeks(birthDate)
 }
 
-var showExplanation = function() {
-  var explanation = document.createElement("p")
-  var text = document.createTextNode("Each box represents one week.")
-  explanation.appendChild(text)
-  window.container.appendChild(explanation)
+var showInstructions = function() {
+  var instructions = document.getElementById("instructions")
+  var description = document.getElementById("description")
+
+  instructions.className = ""
+  description.className += " hidden"
+}
+
+var showDescription = function() {
+  var instructions = document.getElementById("instructions")
+  var description = document.getElementById("description")
+
+  instructions.className += " hidden"
+  description.className = ""
 }
 
 dateInput.onchange = setDate
