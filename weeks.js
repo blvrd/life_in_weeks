@@ -8,13 +8,31 @@ function getCookie (cookieName, callback){
     });
 }
 
+function removeCookie (cookieName, callback){
+    chrome.cookies.remove({
+      'url':'http://www.google.com',
+      'name':cookieName
+    },
+    function(data){
+        callback(data);
+    });
+}
+
 window.container = document.getElementById("weeks");
-getCookie("birthDate", function(cookie) {
-  generateWeeks(new Date(cookie.value))
-})
 window.currentDate = new Date();
 window.weeksLifespan = 4693 // 90 years
 window.dateInput = document.getElementById("dob")
+
+getCookie("birthDate", function(cookie) {
+  if (cookie === null) {
+    showExplanation()
+  } else {
+    var birthDate = new Date(cookie.value)
+    dateInput.value = birthDate.toISOString().slice(0, 10)
+    generateWeeks(birthDate)
+  }
+})
+
 
 var calculateWeeksAlive = function(birthDate) {
   if (birthDate.toString().length > 1) {
@@ -35,7 +53,7 @@ var generateWeeks = function(birthDate) {
     if (weeksAlive && i <= weeksAlive) {
       weekBlock.className += " active"
     }
-    container.appendChild(weekBlock)
+    window.container.appendChild(weekBlock)
   }
 }
 
@@ -43,6 +61,13 @@ var setDate = function(e) {
   var birthDate = new Date(e.target.value)
   chrome.cookies.set({ url: 'http://www.google.com', name: 'birthDate', value: birthDate.toString() })
   generateWeeks(birthDate)
+}
+
+var showExplanation = function() {
+  var explanation = document.createElement("p")
+  var text = document.createTextNode("Each box represents one week.")
+  explanation.appendChild(text)
+  window.container.appendChild(explanation)
 }
 
 dateInput.onchange = setDate
