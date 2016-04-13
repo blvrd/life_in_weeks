@@ -68,6 +68,8 @@ var generateWeeks = function(birthDate) {
     }
     window.container.appendChild(weekBlock)
   }
+  endOfLifeYears = document.createTextNode("90 years")
+  window.container.appendChild(endOfLifeYears)
 }
 
 var setDate = function(e) {
