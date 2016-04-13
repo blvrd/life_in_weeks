@@ -19,10 +19,14 @@ function removeCookie(cookieName, callback) {
 }
 
 function setCookie(cookieName, value, callback) {
+  today = new Date()
+  futureDate = today.setDate(today.getDate() + 365)
+
   chrome.cookies.set({
     url: 'http://www.google.com',
     name: cookieName,
-    value: value.toString()
+    value: value.toString(),
+    expirationDate: futureDate
   })
 }
 
