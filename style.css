@@ -1,3 +1,9 @@
+@-webkit-keyframes pulse {
+  from { -webkit-box-shadow: 0 0 9px #333; }
+  50% { -webkit-box-shadow: 0 0 18px #91bd09; }
+  to { -webkit-box-shadow: 0 0 9px #333; }
+}
+
 * {
   font-family: menlo
 }
@@ -36,6 +42,12 @@ li.week {
 
 .active {
   background-color: #37456B;
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
 }
 
 .hidden {

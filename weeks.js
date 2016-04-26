@@ -60,11 +60,16 @@ var generateWeeks = function(birthDate) {
   showDescription()
   var weeksAlive = calculateWeeksAlive(birthDate)
 
-  for (i = 0; i < weeksLifespan; i++) {
+  for (i = 0; i < window.weeksLifespan; i++) {
     var weekBlock = document.createElement("li")
     weekBlock.className = "week"
+
     if (weeksAlive && i <= weeksAlive) {
       weekBlock.className += " active"
+    }
+
+    if (i === weeksAlive) {
+      weekBlock.className += " pulse"
     }
     window.container.appendChild(weekBlock)
   }
