@@ -53,6 +53,11 @@ var calculateWeeksAlive = function(birthDate) {
 }
 
 var generateWeeks = function(birthDate) {
+  var title = document.getElementById("title")
+  title.className += " active"
+  var dobInputGroup = document.getElementById("dobInputGroup")
+  dobInputGroup.className += " active"
+
   while(container.hasChildNodes()){
     container.removeChild(container.lastChild);
   }
@@ -71,7 +76,25 @@ var generateWeeks = function(birthDate) {
     if (i === weeksAlive) {
       weekBlock.className += " pulse"
     }
+
+    var birth = moment(birthDate)
+    if (i == 0) {
+      weekBlock.dataset.weekOfYear = birth.week()
+    } else {
+      var allWeeks = document.getElementsByClassName("week")
+      weekBlock.dataset.weekOfYear = parseInt(allWeeks[allWeeks.length-1].dataset.weekOfYear) + 1
+    }
+
+    if (weekBlock.dataset.weekOfYear > birth.weeksInYear()) {
+      weekBlock.dataset.weekOfYear = 1
+      weekBlock.className += " newYear"
+      weekBlock.dataset.year = birth.add(i, 'weeks')._d.getFullYear()
+    }
+
     window.container.appendChild(weekBlock)
+    if (weekBlock.dataset.weekOfYear == 1 && weekBlock.className.includes("active")) {
+      weekBlock.innerHTML = `<div class='yearToolTip' id='yearToolTip'><span>${weekBlock.dataset.year}</span></div>`
+    }
   }
   endOfLifeYears = document.createTextNode("90 years")
   window.container.appendChild(endOfLifeYears)
@@ -97,8 +120,17 @@ var showDescription = function() {
   var description = document.getElementById("description")
 
   instructions.className += " hidden"
-  description.className = ""
+  description.className = "description"
 }
 
 dateInput.onchange = setDate
 
+window.onload = function() {
+  document.getElementById("body").style.opacity = 1
+}
+
+document.getElementById("weeks").addEventListener("mousemove", function(e) {
+  if (e.target.className.includes("newYear")) {
+    console.log("hi")
+  }
+})

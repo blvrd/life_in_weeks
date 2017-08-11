@@ -5,21 +5,40 @@
 }
 
 * {
+  font-family: 'Zilla Slab';
+  font-weight: 300;
+  font-size: 14px;
+}
+
+a {
+  color: #fff;
+  text-decoration-skip: ink;
+}
+
+#dob {
   font-family: menlo
 }
 
 body {
+  background: #222;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #666;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 300ms;
 }
 
-.title {
+.title.active {
   position: absolute;
   top: 0;
   left: 20px;
+}
+
+.description {
+  font-size: 16px;
+  margin-top: 60px;
 }
 
 ul.weeks {
@@ -32,24 +51,79 @@ ul.weeks {
 }
 
 li.week {
-  border: 1px solid #000;
+  border: 1px solid #666;
   height: 4px;
   width: 4px;
   margin: 2px 5px 2px 0;
+  border-radius: 50%;
+  position: relative;
 }
 
-.dobInputGroup {
+li.week:hover .yearToolTip {
+  opacity: 1;
+}
+
+.yearToolTip {
+  position: absolute;
+  top: -32px;
+  left: -24px;
   font-size: 14px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 300ms;
+  background: #444;
+  border-radius: 5px;
+  border: 2px solid #666;
+  padding: 5px 10px;
+}
+
+::-webkit-datetime-edit {}
+::-webkit-datetime-edit-fields-wrapper { background: #222; }
+::-webkit-datetime-edit-text { color: #fff; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: #fff; }
+::-webkit-datetime-edit-day-field { color: #fff; }
+::-webkit-datetime-edit-year-field { color: #fff; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-clear-button { display: none; }
+::-webkit-calendar-picker-indicator { background: #222; color: #666; opacity: 1; }
+
+.dobInputGroup {
+  /* font-size: 14px; */
   display: flex;
   flex-direction: column;
 }
 
-.dobInputGroup input {
-  font-size: 14px;
+.dobInputGroup.active {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 10px;
+  border-left: 2px solid #666;
+  border-bottom: 2px solid #666;
+  border-bottom-left-radius: 3px;
 }
 
-.active {
-  background-color: #37456B;
+.dobInputGroup.active label {
+  margin-top: 0;
+}
+
+.dobInputGroup input {
+  font-size: 12px;
+  border: none;
+  padding-bottom: 1px;
+  background: #222;
+  outline: none;
+  width: 110px;
+}
+
+.dobInputGroup label {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+li.active {
+  background-color: #fff;
+  border: 1px solid #fff !important;
 }
 
 .pulse {
@@ -61,3 +135,9 @@ li.week {
 .hidden {
   display: none;
 }
+
+.newYear.active {
+  background: #00BBFF;
+  border: 1px solid #00BBFF !important;
+}
+

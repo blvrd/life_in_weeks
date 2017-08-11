@@ -1,10 +1,12 @@
 {
   "name": "Your Life in Weeks",
-  "description": "A motivating look at how many weeks you could have to live. Make the most of your time!",
-  "version": "1.0.1",
+  "description": "Make the most of your time!",
+  "version": "2",
   "manifest_version": 2,
   "icons": {
-    "128": "icon_128.png"
+    "128": "icon_128.png",
+    "48": "icon_48.png",
+    "16": "icon_16.png"
   },
   "chrome_url_overrides" : {
     "newtab": "weeks.html"
