@@ -128,9 +128,3 @@ dateInput.onchange = setDate
 window.onload = function() {
   document.getElementById("body").style.opacity = 1
 }
-
-document.getElementById("weeks").addEventListener("mousemove", function(e) {
-  if (e.target.className.includes("newYear")) {
-    console.log("hi")
-  }
-})
