@@ -65,6 +65,7 @@ var generateWeeks = function(birthDate) {
   showDescription()
   var weeksAlive = calculateWeeksAlive(birthDate)
 
+  var lastYearSet = null
   for (i = 0; i < window.weeksLifespan; i++) {
     var weekBlock = document.createElement("li")
     weekBlock.className = "week"
@@ -85,10 +86,17 @@ var generateWeeks = function(birthDate) {
       weekBlock.dataset.weekOfYear = parseInt(allWeeks[allWeeks.length-1].dataset.weekOfYear) + 1
     }
 
-    if (weekBlock.dataset.weekOfYear > birth.weeksInYear()) {
+    if (lastYearSet) {
+      var weeksInYear = moment(lastYearSet, "YYYY").weeksInYear()
+    } else {
+      var weeksInYear = birth.weeksInYear()
+    }
+
+    if (weekBlock.dataset.weekOfYear > weeksInYear) {
       weekBlock.dataset.weekOfYear = 1
       weekBlock.className += " newYear"
-      weekBlock.dataset.year = birth.add(i, 'weeks')._d.getFullYear()
+      weekBlock.dataset.year = birth.add(i+1, 'weeks')._d.getFullYear()
+      lastYearSet = weekBlock.dataset.year
     }
 
     window.container.appendChild(weekBlock)
