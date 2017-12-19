@@ -3,7 +3,11 @@
     <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
     <title>Group</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+      <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Zilla+Slab')
+      </style>
+    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Group" fill="#FFFFFF">
             <g id="np_hourglass_454375_000000" fill-rule="nonzero">
