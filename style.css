@@ -30,10 +30,18 @@ body {
   transition: opacity 300ms;
 }
 
+.title {
+  width: 200px;
+}
+
 .title.active {
   position: absolute;
   top: 0;
   left: 20px;
+}
+
+.title tspan {
+  font-size: 42px;
 }
 
 .description {

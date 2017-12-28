@@ -4,8 +4,9 @@
     <title>Group</title>
     <desc>Created with Sketch.</desc>
     <defs>
+      <link xmlns="http://www.w3.org/1999/xhtml" href="http://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet" type="text/css" />
       <style>
-        @import url(http://fonts.googleapis.com/css?family=Zilla+Slab)
+      text { font-family: 'Zilla Slab'; text-rendering: geometricPrecision; }
       </style>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
