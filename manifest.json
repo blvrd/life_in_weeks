@@ -13,6 +13,7 @@
   },
   "permissions": [
     "cookies",
-    "*://*.google.com/"
+    "*://*.google.com/",
+    "*://developer.mozilla.org/*"
   ]
 }

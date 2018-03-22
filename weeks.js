@@ -1,20 +1,22 @@
+window.cookieURL = window.browser == undefined ? "https://www.google.com" : "https://developer.mozilla.org"
+
 function getCookie(cookieName, callback) {
-    chrome.cookies.get({
-      'url':'http://www.google.com',
-      'name':cookieName
-    },
+  chrome.cookies.get({
+    'url': cookieURL,
+    'name': cookieName
+  },
     function(data){
-        callback(data);
+      callback(data);
     });
 }
 
 function removeCookie(cookieName, callback) {
-    chrome.cookies.remove({
-      'url':'http://www.google.com',
-      'name':cookieName
-    },
+  chrome.cookies.remove({
+    'url':cookieURL,
+    'name':cookieName
+  },
     function(data){
-        callback(data);
+      callback(data);
     });
 }
 
@@ -23,7 +25,7 @@ function setCookie(cookieName, value, callback) {
   futureDate = today.setDate(today.getDate() + 365)
 
   chrome.cookies.set({
-    url: 'http://www.google.com',
+    url: cookieURL,
     name: cookieName,
     value: value.toString(),
     expirationDate: futureDate
@@ -37,7 +39,6 @@ window.dateInput = document.getElementById("dob")
 
 getCookie("birthDate", function(cookie) {
   if (cookie === null || cookie.value === "Invalid Date") {
-    console.log(cookie)
     generateWeeks(new Date())
   } else {
     var birthDate = new Date(cookie.value)
@@ -106,7 +107,6 @@ var generateWeeks = function(birthDate) {
 
 var setDate = function(e) {
   var birthDate = new Date(e.target.value)
-  console.log(birthDate)
 
   setCookie('birthDate', birthDate)
   generateWeeks(birthDate)
