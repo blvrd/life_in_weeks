@@ -37,7 +37,8 @@ window.dateInput = document.getElementById("dob")
 
 getCookie("birthDate", function(cookie) {
   if (cookie === null || cookie.value === "Invalid Date") {
-    showInstructions()
+    console.log(cookie)
+    generateWeeks(new Date())
   } else {
     var birthDate = new Date(cookie.value)
     dateInput.value = birthDate.toISOString().slice(0, 10)
@@ -62,7 +63,6 @@ var generateWeeks = function(birthDate) {
     container.removeChild(container.lastChild);
   }
 
-  showDescription()
   var weeksAlive = calculateWeeksAlive(birthDate)
 
   var lastYearSet = null
@@ -72,10 +72,6 @@ var generateWeeks = function(birthDate) {
 
     if (weeksAlive && i <= weeksAlive) {
       weekBlock.className += " active"
-    }
-
-    if (i === weeksAlive) {
-      weekBlock.className += " pulse"
     }
 
     var birth = moment(birthDate)
@@ -110,28 +106,13 @@ var generateWeeks = function(birthDate) {
 
 var setDate = function(e) {
   var birthDate = new Date(e.target.value)
+  console.log(birthDate)
 
   setCookie('birthDate', birthDate)
   generateWeeks(birthDate)
 }
 
-var showInstructions = function() {
-  var instructions = document.getElementById("instructions")
-  var description = document.getElementById("description")
-
-  instructions.className = ""
-  description.className += " hidden"
-}
-
-var showDescription = function() {
-  var instructions = document.getElementById("instructions")
-  var description = document.getElementById("description")
-
-  instructions.className += " hidden"
-  description.className = "description"
-}
-
-dateInput.onchange = setDate
+dateInput.onchange = function(e) { window.setTimeout(setDate(e), 0) }
 
 window.onload = function() {
   document.getElementById("body").style.opacity = 1
